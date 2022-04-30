@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls 3 Items attack calculator</title>
+    <meta
+      name="description"
+      content="Dark Souls 3 items attack calculator and additional effects."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls3/itemATK.min.css" />
+    <script src="/public/scripts/release/DarkSouls3/itemATK.min.js"></script>
+  </head>
+  <body>
+    <div id="main-menu">
+      <ul class="mm__horizontal">
+        <li>
+          <a href="/"><i class="material-icons">home</i></a>
+        </li>
+        <li><a href="/darksouls">DS</a></li>
+        <li><a href="/darksouls2">DS 2</a></li>
+        <li><a href="/darksouls3">DS 3</a></li>
+      </ul>
+    </div>
+    <div class="calculator form-controls">
+      <h2>Dark Souls &#8546; Items attack calculator</h2>
+      <div class="params">
+        <div class="attributes">
+          <div>
+            <label for="strength">Strength</label><input id="strength" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="dexterity">Dexterity</label><input id="dexterity" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="intelligence">Intelligence</label
+            ><input id="intelligence" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="faith">Faith</label><input id="faith" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="luck">Luck</label><input id="luck" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+        </div>
+        <div class="max-hp">
+          <label for="max-hp">Max HP</label><input id="max-hp" type="number" />
+        </div>
+      </div>
+      <div class="wrapper-table">
+        <table id="item-table">
+          <thead>
+            <tr>
+              <td class="item"></td>
+              <td class="attack-power" colspan="5">Attack power</td>
+              <td class="effects" colspan="4">Effects</td>
+              <td class="healing" colspan="3">HP, FP effects</td>
+              <td class="duration"></td>
+              <td class="fp-use"></td>
+            </tr>
+            <tr>
+              <td class="name" data-field="name">
+                Item
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="physical-atk" data-field="physicalATK">
+                P
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="magic-atk" data-field="magicATK">
+                M
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="fire-atk" data-field="fireATK">
+                F
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="lightning-atk" data-field="lightningATK">
+                L
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="dark-atk" data-field="darkATK">
+                D
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="bleed-aux" data-field="bleedAUX">
+                Bl
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="poison-aux" data-field="poisonAUX">
+                Po
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="toxic-aux" data-field="toxicAUX">
+                To
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="frost-aux" data-field="frostAUX">
+                Fr
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="hp-change" data-field="hpChange">
+                HP
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="hp-change-per-second" data-field="hpChangePerSecond">
+                HP/s
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="fp-change" data-field="fpChange">
+                FP
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="duration" data-field="duration">
+                Len
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="fp-use" data-field="fpUse">
+                FP
+                <div class="sort-sign material-icons"></div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="hints">
+        P - Physical attack, M - Magic attack, F - Fire attack, L - Lightning attack, D - Dark
+        attack, Bl - Bleed effect, To - Toxic effect, Po - Poison effect, Fr - Frost effect, HP -
+        change HP, HP/s - change HP per second, Len - Length of effect, FP - FP consumption.
+      </div>
+    </div>
+  </body>
+</html>

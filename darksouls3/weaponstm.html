@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls 3 Weapons stamina usage</title>
+    <meta name="description" content="Dark Souls 3 weapons stamina usage calculator." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls3/weaponSTM.min.css" />
+    <script src="/public/scripts/release/DarkSouls3/weaponSTM.min.js"></script>
+  </head>
+  <body>
+    <div id="main-menu">
+      <ul class="mm__horizontal">
+        <li>
+          <a href="/"><i class="material-icons">home</i></a>
+        </li>
+        <li><a href="/darksouls">DS</a></li>
+        <li><a href="/darksouls2">DS 2</a></li>
+        <li><a href="/darksouls3">DS 3</a></li>
+      </ul>
+    </div>
+    <div class="calculator form-controls">
+      <h2>Dark Souls &#8546; Weapons stamina usage</h2>
+      <div class="params">
+        <div>
+          <input id="show-groups" type="checkbox" checked /><label for="show-groups"
+            >Show groups</label
+          >
+        </div>
+        <div>
+          <input id="all-groups" type="checkbox" /><label for="all-groups">All groups</label>
+        </div>
+        <div>
+          <div class="mini-caption">Groups</div>
+          <div id="groups" class="checkbox-list"></div>
+        </div>
+      </div>
+      <div class="wrapper-table">
+        <table id="weapon-table">
+          <thead>
+            <tr>
+              <td class="weapon"></td>
+              <td class="one-handed" colspan="9">One Handed</td>
+              <td class="two-handed" colspan="10">Two Handed / Paired</td>
+            </tr>
+            <tr>
+              <td class="name" data-field="name">
+                Weapon
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r1-1" data-field="h1_r1_1">
+                R1<br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r1-2" data-field="h1_r1_2">
+                R1<br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r2-1" data-field="h1_r2_1">
+                R2<br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r2-2" data-field="h1_r2_2">
+                R2<br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r2-charged-1" data-field="h1_r2_charged_1">
+                R2<br /><span class="charge">charge</span><br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-r2-charged-2" data-field="h1_r2_charged_2">
+                R2<br /><span class="charge">charge</span><br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-roll" data-field="h1_roll">
+                Roll
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-run" data-field="h1_run">
+                Run
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h1-jump" data-field="h1_jump">
+                Jump
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r1-1" data-field="h2_r1_1">
+                R1/L1<br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r1-2" data-field="h2_r1_2">
+                R1/L1<br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r1-3" data-field="h2_r1_3">
+                R1/L1<br />3
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r2-1" data-field="h2_r2_1">
+                R2<br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r2-2" data-field="h2_r2_2">
+                R2<br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r2-charged-1" data-field="h2_r2_charged_1">
+                R2<br /><span class="charge">charge</span><br />1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-r2-charged-2" data-field="h2_r2_charged_2">
+                R2<br /><span class="charge">charge</span><br />2
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-roll" data-field="h2_roll">
+                Roll<br />R1/L1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-run" data-field="h2_run">
+                Run<br />R1/L1
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="h2-jump" data-field="h2_jump">
+                Jump
+                <div class="sort-sign material-icons"></div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
