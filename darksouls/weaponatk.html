@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls Weapons attack calculator</title>
+    <meta
+      name="description"
+      content="Dark Souls weapons attack calculator, additional effects, magic adjustment, requirements and scaling."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls/weaponATK.min.css" />
+    <script src="/public/scripts/release/DarkSouls/weaponATK.min.js"></script>
+  </head>
+  <body>
+    <div id="main-menu">
+      <ul class="mm__horizontal">
+        <li>
+          <a href="/"><i class="material-icons">home</i></a>
+        </li>
+        <li><a href="/darksouls">DS</a></li>
+        <li><a href="/darksouls2">DS 2</a></li>
+        <li><a href="/darksouls3">DS 3</a></li>
+      </ul>
+    </div>
+    <div class="calculator form-controls">
+      <h2>Dark Souls Weapons attack calculator</h2>
+      <div class="params">
+        <div class="attributes">
+          <div>
+            <label for="strength">Strength</label><input id="strength" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="dexterity">Dexterity</label><input id="dexterity" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="intelligence">Intelligence</label
+            ><input id="intelligence" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="faith">Faith</label><input id="faith" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+          <div>
+            <label for="humanity">Humanity</label><input id="humanity" type="number" /><button
+              type="button"
+              class="material-icons down"
+              tabindex="-1"
+            >
+              keyboard_arrow_down</button
+            ><button type="button" class="material-icons up" tabindex="-1">
+              keyboard_arrow_up
+            </button>
+          </div>
+        </div>
+        <div class="reinforce">
+          <label for="reinforce">Reinforce</label>
+          <div><select id="reinforce"></select></div>
+        </div>
+        <div><input id="grip" type="checkbox" /><label for="grip">Two-handed</label></div>
+        <div>
+          <input id="effective" type="checkbox" /><label for="effective">Effective only</label>
+        </div>
+        <div>
+          <input id="rh-buffable" type="checkbox" /><label for="rh-buffable"
+            >RH buffable only</label
+          >
+        </div>
+        <div>
+          <input id="lh-buffable" type="checkbox" /><label for="lh-buffable"
+            >LH buffable only</label
+          >
+        </div>
+        <div>
+          <input id="show-groups" type="checkbox" checked /><label for="show-groups"
+            >Show groups</label
+          >
+        </div>
+        <div>
+          <input id="all-groups" type="checkbox" /><label for="all-groups">All groups</label>
+        </div>
+        <div>
+          <input id="all-upgrades" type="checkbox" /><label for="all-upgrades">All upgrades</label>
+        </div>
+        <div>
+          <div class="mini-caption">Groups</div>
+          <div id="groups" class="checkbox-list"></div>
+        </div>
+        <div>
+          <div class="mini-caption">Upgrades</div>
+          <div id="upgrades" class="checkbox-list"></div>
+        </div>
+      </div>
+      <div class="wrapper-table">
+        <table id="weapon-table">
+          <thead>
+            <tr>
+              <td class="weapon"></td>
+              <td class="requirements" colspan="4">Requirements</td>
+              <td class="scaling" colspan="4">Scaling</td>
+              <td class="attack-power" colspan="5">Attack power</td>
+              <td class="effects" colspan="4">Effects</td>
+              <td class="mag-adjust"></td>
+              <td class="weight"></td>
+            </tr>
+            <tr>
+              <td class="name" data-field="name">
+                Weapon
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="require-str" data-field="requireSTR">
+                Str
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="require-dex" data-field="requireDEX">
+                Dex
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="require-int" data-field="requireINT">
+                Int
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="require-fth" data-field="requireFTH">
+                Fth
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="scale-str" data-field="scaleSTR">
+                Str
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="scale-dex" data-field="scaleDEX">
+                Dex
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="scale-int" data-field="scaleINT">
+                Int
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="scale-fth" data-field="scaleFTH">
+                Fth
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="physical-atk" data-field="physicalATK">
+                P
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="magic-atk" data-field="magicATK">
+                M
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="fire-atk" data-field="fireATK">
+                F
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="lightning-atk" data-field="lightningATK">
+                L
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="total-atk" data-field="totalATK">
+                Ttl
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="bleed-aux" data-field="bleedAUX">
+                Bl
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="poison-aux" data-field="poisonAUX">
+                Po
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="divine-aux" data-field="divineAUX">
+                Di
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="occult-aux" data-field="occultAUX">
+                Oc
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="mag-adjust" data-field="magAdjust">
+                MA
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="weight" data-field="weight">
+                W
+                <div class="sort-sign material-icons"></div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="hints">
+        Str - Strength, Dex - Dexterity, Int - Intelligence, Fth - Faith, P - Physical attack, M -
+        Magic attack, F - Fire attack, L - Lightning attack, Ttl - Total attack, Bl - Bleed effect,
+        Po - Poison effect, Di - Divine effect, Oc - Occult effect, MA - Magic adjustment, W -
+        weight.
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls Armor</title>
+    <meta name="description" content="Dark Souls armor defence parameters." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls/armor.min.css" />
+    <script src="/public/scripts/release/DarkSouls/armor.min.js"></script>
+  </head>
+  <body>
+    <div id="main-menu">
+      <ul class="mm__horizontal">
+        <li>
+          <a href="/"><i class="material-icons">home</i></a>
+        </li>
+        <li><a href="/darksouls">DS</a></li>
+        <li><a href="/darksouls2">DS 2</a></li>
+        <li><a href="/darksouls3">DS 3</a></li>
+      </ul>
+    </div>
+    <div class="calculator form-controls">
+      <h2>Dark Souls Armor</h2>
+      <div class="params">
+        <div id="groups">
+          <div>
+            <input id="head" type="radio" name="group" value="0" checked /><label for="head"
+              >Head</label
+            >
+          </div>
+          <div>
+            <input id="chest" type="radio" name="group" value="1" /><label for="chest">Chest</label>
+          </div>
+          <div>
+            <input id="hands" type="radio" name="group" value="2" /><label for="hands">Hands</label>
+          </div>
+          <div>
+            <input id="legs" type="radio" name="group" value="3" /><label for="legs">Legs</label>
+          </div>
+        </div>
+        <div class="reinforce">
+          <label for="reinforce">Reinforce</label>
+          <div><select id="reinforce"></select></div>
+        </div>
+      </div>
+      <div class="wrapper-table">
+        <table id="protector-table">
+          <thead>
+            <tr>
+              <td class="armor"></td>
+              <td class="defence" colspan="7">Defence</td>
+              <td class="resistance" colspan="3">Resistance</td>
+              <td class="poise"></td>
+              <td class="weight"></td>
+              <td class="pw-ratio"></td>
+            </tr>
+            <tr>
+              <td class="name" data-field="name">
+                Name
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="physical-def" data-field="physicalDEF">
+                P
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="strike-def" data-field="strikeDEF">
+                St
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="slash-def" data-field="slashDEF">
+                Sl
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="thrust-def" data-field="thrustDEF">
+                Th
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="magic-def" data-field="magicDEF">
+                M
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="fire-def" data-field="fireDEF">
+                F
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="lightning-def" data-field="lightningDEF">
+                L
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="bleed-res" data-field="bleedRES">
+                Bl
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="poison-res" data-field="poisonRES">
+                Po
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="curse-res" data-field="curseRES">
+                Cu
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="poise" data-field="poise">
+                Ps
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="weight" data-field="weight">
+                W
+                <div class="sort-sign material-icons"></div>
+              </td>
+              <td class="pw-ratio" data-field="pwRatio">
+                Ps:W
+                <div class="sort-sign material-icons"></div>
+              </td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="hints">
+        P - Physical defence, M - Magic defence, F - Fire defence, L - Lightning defence, Bl - Bleed
+        resistance, Po - Poison resistance, To - Toxic resistance, Cu - Curse resistance, Ps -
+        Poise, W - Weight, Ps:W - Poise / Weight ratio.
+      </div>
+    </div>
+  </body>
+</html>

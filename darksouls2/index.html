@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls 2 Character Planner</title>
+    <meta
+      name="description"
+      content="Dark Souls 2 Character Planner includes stats, weapons attack calculator, all equipment effects and search optimal class."
+    />
+    <meta name="keywords" content="Dark Souls 2 Character Planner" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls2/planner.min.css" />
+    <script src="/public/scripts/release/DarkSouls2/ds2planner.min.js"></script>
+  </head>
+  <body>
+    <script>
+      var plannerId = 'darksouls2'
+    </script>
+    <div class="modal-overlay">
+      <div id="main-menu">
+        <ul class="mm__horizontal">
+          <li>
+            <a href="/"><i class="material-icons">home</i></a>
+          </li>
+          <li><a href="/darksouls">DS</a></li>
+          <li><a href="/darksouls2">DS 2</a></li>
+          <li><a href="/darksouls3">DS 3</a></li>
+        </ul>
+      </div>
+      <div class="planner dark">
+        <h2 class="page-caption">DARK SOULS 2 Character Planner</h2>
+        <div class="col n1">
+          <div class="character-class">
+            <label for="class">Class</label>
+            <div class="wrapper-class"><select id="class"></select></div>
+            <div class="options">
+              <button id="button-new" class="material-icons" title="New build">add</button
+              ><button id="button-reset" class="material-icons" title="Reset">refresh</button>
+            </div>
+          </div>
+          <div class="gender">
+            <label for="gender">Gender</label>
+            <div><select id="gender"></select></div>
+          </div>
+          <div class="level">
+            <label for="level">Level</label><input id="level" type="text" readonly tabindex="-1" />
+          </div>
+          <div class="attributes">
+            <div class="mini-caption">
+              <label id="label-attribute"></label><span class="initial">Init</span
+              ><span class="current">Current</span><span class="correct">Alter</span
+              ><span class="total">Total</span>
+            </div>
+            <div>
+              <label id="label-vigor" for="vigor"></label
+              ><output id="vigor-initial" class="initial"></output
+              ><input id="vigor" type="number" /><button class="material-icons down" tabindex="-1">
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="vigor-correct" class="correct"></output
+              ><output id="vigor-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-endurance" for="endurance"></label
+              ><output id="endurance-initial" class="initial"></output
+              ><input id="endurance" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="endurance-correct" class="correct"></output
+              ><output id="endurance-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-vitality" for="vitality"></label
+              ><output id="vitality-initial" class="initial"></output
+              ><input id="vitality" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="vitality-correct" class="correct"></output
+              ><output id="vitality-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-attunement" for="attunement"></label
+              ><output id="attunement-initial" class="initial"></output
+              ><input id="attunement" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="attunement-correct" class="correct"></output
+              ><output id="attunement-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-strength" for="strength"></label
+              ><output id="strength-initial" class="initial"></output
+              ><input id="strength" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="strength-correct" class="correct"></output
+              ><output id="strength-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-dexterity" for="dexterity"></label
+              ><output id="dexterity-initial" class="initial"></output
+              ><input id="dexterity" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="dexterity-correct" class="correct"></output
+              ><output id="dexterity-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-adaptability" for="adaptability"></label
+              ><output id="adaptability-initial" class="initial"></output
+              ><input id="adaptability" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="adaptability-correct" class="correct"></output
+              ><output id="adaptability-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-intelligence" for="intelligence"></label
+              ><output id="intelligence-initial" class="initial"></output
+              ><input id="intelligence" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="intelligence-correct" class="correct"></output
+              ><output id="intelligence-total" class="total"></output>
+            </div>
+            <div>
+              <label id="label-faith" for="faith"></label
+              ><output id="faith-initial" class="initial"></output
+              ><input id="faith" type="number" /><button class="material-icons down" tabindex="-1">
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button
+              ><output id="faith-correct" class="correct"></output
+              ><output id="faith-total" class="total"></output>
+            </div>
+          </div>
+          <div class="cost">
+            <div>
+              <div class="mini-caption">Souls to next level</div>
+              <input id="souls-to-next-level" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="mini-caption">Min Soul Memory</div>
+              <input id="min-soul-memory" type="text" readonly tabindex="-1" />
+            </div>
+          </div>
+          <div class="covenant">
+            <label for="covenant">Covenant</label>
+            <div><select id="covenant"></select></div>
+          </div>
+          <div class="spells">
+            <div class="mini-caption"><span>Spell</span><span>Uses</span></div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-1"></select></div>
+              <input id="spell-1-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-2"></select></div>
+              <input id="spell-2-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-3"></select></div>
+              <input id="spell-3-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-4"></select></div>
+              <input id="spell-4-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-5"></select></div>
+              <input id="spell-5-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-6"></select></div>
+              <input id="spell-6-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-7"></select></div>
+              <input id="spell-7-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-8"></select></div>
+              <input id="spell-8-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-9"></select></div>
+              <input id="spell-9-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-10"></select></div>
+              <input id="spell-10-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-11"></select></div>
+              <input id="spell-11-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-12"></select></div>
+              <input id="spell-12-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-13"></select></div>
+              <input id="spell-13-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="wrapper-spell"><select id="spell-14"></select></div>
+              <input id="spell-14-uses" type="text" class="spell-uses" readonly tabindex="-1" />
+            </div>
+          </div>
+        </div>
+        <div class="col n2">
+          <div class="armor">
+            <div class="mini-caption">Armor</div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="head-require-strength"></output
+                ><output id="head-require-dexterity"></output
+                ><output id="head-require-intelligence"></output
+                ><output id="head-require-faith"></output>
+              </div>
+              <div>
+                <label for="head">Head</label>
+                <div class="wrapper-protector"><select id="head"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="chest-require-strength"></output
+                ><output id="chest-require-dexterity"></output
+                ><output id="chest-require-intelligence"></output
+                ><output id="chest-require-faith"></output>
+              </div>
+              <div>
+                <label for="chest">Chest</label>
+                <div class="wrapper-protector"><select id="chest"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="hands-require-strength"></output
+                ><output id="hands-require-dexterity"></output
+                ><output id="hands-require-intelligence"></output
+                ><output id="hands-require-faith"></output>
+              </div>
+              <div>
+                <label for="hands">Hands</label>
+                <div class="wrapper-protector"><select id="hands"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="legs-require-strength"></output
+                ><output id="legs-require-dexterity"></output
+                ><output id="legs-require-intelligence"></output
+                ><output id="legs-require-faith"></output>
+              </div>
+              <div>
+                <label for="legs">Legs</label>
+                <div class="wrapper-protector"><select id="legs"></select></div>
+              </div>
+            </div>
+          </div>
+          <div class="weapons">
+            <div class="mini-caption">
+              <span class="lh">Left hand</span><span class="rh">Right hand</span>
+            </div>
+            <div class="active-weapons">
+              <div class="lh">
+                <div class="equipment-params requirements">
+                  Require <output id="lh1-require-strength"></output
+                  ><output id="lh1-require-dexterity"></output
+                  ><output id="lh1-require-intelligence"></output
+                  ><output id="lh1-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="lh1-physical-atk"></output><output id="lh1-magic-atk"></output
+                  ><output id="lh1-fire-atk"></output><output id="lh1-lightning-atk"></output
+                  ><output id="lh1-dark-atk"></output><output id="lh1-poison-aux"></output
+                  ><output id="lh1-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="lh1-physical-def"></output><output id="lh1-magic-def"></output
+                  ><output id="lh1-fire-def"></output><output id="lh1-lightning-def"></output
+                  ><output id="lh1-dark-def"></output><output id="lh1-poison-res"></output
+                  ><output id="lh1-bleed-res"></output><output id="lh1-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="lh1"></select></div>
+                <div class="wrapper-infusion"><select id="lh1-infusion"></select></div>
+              </div>
+              <div class="rh">
+                <div class="equipment-params requirements">
+                  Require <output id="rh1-require-strength"></output
+                  ><output id="rh1-require-dexterity"></output
+                  ><output id="rh1-require-intelligence"></output
+                  ><output id="rh1-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="rh1-physical-atk"></output><output id="rh1-magic-atk"></output
+                  ><output id="rh1-fire-atk"></output><output id="rh1-lightning-atk"></output
+                  ><output id="rh1-dark-atk"></output><output id="rh1-poison-aux"></output
+                  ><output id="rh1-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="rh1-physical-def"></output><output id="rh1-magic-def"></output
+                  ><output id="rh1-fire-def"></output><output id="rh1-lightning-def"></output
+                  ><output id="rh1-dark-def"></output><output id="rh1-poison-res"></output
+                  ><output id="rh1-bleed-res"></output><output id="rh1-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="rh1"></select></div>
+                <div class="wrapper-infusion"><select id="rh1-infusion"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="lh">
+                <div class="equipment-params requirements">
+                  Require <output id="lh2-require-strength"></output
+                  ><output id="lh2-require-dexterity"></output
+                  ><output id="lh2-require-intelligence"></output
+                  ><output id="lh2-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="lh2-physical-atk"></output><output id="lh2-magic-atk"></output
+                  ><output id="lh2-fire-atk"></output><output id="lh2-lightning-atk"></output
+                  ><output id="lh2-dark-atk"></output><output id="lh2-poison-aux"></output
+                  ><output id="lh2-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="lh2-physical-def"></output><output id="lh2-magic-def"></output
+                  ><output id="lh2-fire-def"></output><output id="lh2-lightning-def"></output
+                  ><output id="lh2-dark-def"></output><output id="lh2-poison-res"></output
+                  ><output id="lh2-bleed-res"></output><output id="lh2-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="lh2"></select></div>
+                <div class="wrapper-infusion"><select id="lh2-infusion"></select></div>
+              </div>
+              <div class="rh">
+                <div class="equipment-params requirements">
+                  Require <output id="rh2-require-strength"></output
+                  ><output id="rh2-require-dexterity"></output
+                  ><output id="rh2-require-intelligence"></output
+                  ><output id="rh2-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="rh2-physical-atk"></output><output id="rh2-magic-atk"></output
+                  ><output id="rh2-fire-atk"></output><output id="rh2-lightning-atk"></output
+                  ><output id="rh2-dark-atk"></output><output id="rh2-poison-aux"></output
+                  ><output id="rh2-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="rh2-physical-def"></output><output id="rh2-magic-def"></output
+                  ><output id="rh2-fire-def"></output><output id="rh2-lightning-def"></output
+                  ><output id="rh2-dark-def"></output><output id="rh2-poison-res"></output
+                  ><output id="rh2-bleed-res"></output><output id="rh2-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="rh2"></select></div>
+                <div class="wrapper-infusion"><select id="rh2-infusion"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="lh">
+                <div class="equipment-params requirements">
+                  Require <output id="lh3-require-strength"></output
+                  ><output id="lh3-require-dexterity"></output
+                  ><output id="lh3-require-intelligence"></output
+                  ><output id="lh3-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="lh3-physical-atk"></output><output id="lh3-magic-atk"></output
+                  ><output id="lh3-fire-atk"></output><output id="lh3-lightning-atk"></output
+                  ><output id="lh3-dark-atk"></output><output id="lh3-poison-aux"></output
+                  ><output id="lh3-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="lh3-physical-def"></output><output id="lh3-magic-def"></output
+                  ><output id="lh3-fire-def"></output><output id="lh3-lightning-def"></output
+                  ><output id="lh3-dark-def"></output><output id="lh3-poison-res"></output
+                  ><output id="lh3-bleed-res"></output><output id="lh3-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="lh3"></select></div>
+                <div class="wrapper-infusion"><select id="lh3-infusion"></select></div>
+              </div>
+              <div class="rh">
+                <div class="equipment-params requirements">
+                  Require <output id="rh3-require-strength"></output
+                  ><output id="rh3-require-dexterity"></output
+                  ><output id="rh3-require-intelligence"></output
+                  ><output id="rh3-require-faith"></output>
+                </div>
+                <div class="equipment-params attack">
+                  <output id="rh3-physical-atk"></output><output id="rh3-magic-atk"></output
+                  ><output id="rh3-fire-atk"></output><output id="rh3-lightning-atk"></output
+                  ><output id="rh3-dark-atk"></output><output id="rh3-poison-aux"></output
+                  ><output id="rh3-bleed-aux"></output>
+                </div>
+                <div class="equipment-params defence">
+                  <output id="rh3-physical-def"></output><output id="rh3-magic-def"></output
+                  ><output id="rh3-fire-def"></output><output id="rh3-lightning-def"></output
+                  ><output id="rh3-dark-def"></output><output id="rh3-poison-res"></output
+                  ><output id="rh3-bleed-res"></output><output id="rh3-stability"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="rh3"></select></div>
+                <div class="wrapper-infusion"><select id="rh3-infusion"></select></div>
+              </div>
+            </div>
+          </div>
+          <div class="grip">
+            <input id="grip" type="checkbox" /><label for="grip">Two-handed</label>
+          </div>
+          <div class="rings">
+            <div class="mini-caption">Rings</div>
+            <div><select id="ring-1"></select></div>
+            <div><select id="ring-2"></select></div>
+            <div><select id="ring-3"></select></div>
+            <div><select id="ring-4"></select></div>
+          </div>
+          <div class="effects">
+            <div class="mini-caption">Effects</div>
+            <ul id="effects"></ul>
+          </div>
+        </div>
+        <div class="col n3">
+          <div class="perfomance-1">
+            <div><label>HP</label><input id="hp" type="text" readonly tabindex="-1" /></div>
+            <div>
+              <label>Stamina</label><input id="stamina" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Agility</label><input id="agility" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Attunement Slots</label
+              ><input id="attunement-slots" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Cast Speed</label><input id="cast-speed" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Equipment Load</label
+              ><input id="equipment-load" type="text" readonly tabindex="-1" />
+            </div>
+            <div><label>Poise</label><input id="poise" type="text" readonly tabindex="-1" /></div>
+          </div>
+          <div class="perfomance-2">
+            <div>
+              <div class="mini-caption">Attack bonuses</div>
+              <div>
+                <label>Strength</label
+                ><input id="strength-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Dexterity</label
+                ><input id="dexterity-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Magic</label
+                ><input id="magic-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Fire</label><input id="fire-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Lightning</label
+                ><input id="lightning-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Dark</label><input id="dark-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Poison</label
+                ><input id="poison-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Bleed</label
+                ><input id="bleed-atk-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="mini-caption">Defence bonuses</div>
+              <div>
+                <label>Physical</label
+                ><input id="physical-def-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Magic</label
+                ><input id="magic-def-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Fire</label><input id="fire-def-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Lightning</label
+                ><input id="lightning-def-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Dark</label><input id="dark-def-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="mini-caption">Resistance bonuses</div>
+              <div>
+                <label>Poison</label
+                ><input id="poison-res-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Bleed</label
+                ><input id="bleed-res-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Petrify</label
+                ><input id="petrify-res-bonus" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Curse</label
+                ><input id="curse-res-bonus" type="text" readonly tabindex="-1" />
+              </div>
+            </div>
+            <div>
+              <div class="mini-caption">Defence</div>
+              <div>
+                <label>Physical</label
+                ><input id="physical-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="vs">
+                <label>VS Strike</label><input id="strike-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="vs">
+                <label>VS Slash</label><input id="slash-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="vs">
+                <label>VS Thrust</label><input id="thrust-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Magic</label><input id="magic-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Fire</label><input id="fire-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Lightning</label
+                ><input id="lightning-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Dark</label><input id="dark-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="mini-caption">Resistance</div>
+              <div>
+                <label>Poison</label><input id="poison-res" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Bleed</label><input id="bleed-res" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Petrify</label><input id="petrify-res" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Curse</label><input id="curse-res" type="text" readonly tabindex="-1" />
+              </div>
+            </div>
+          </div>
+          <div class="items">
+            <div class="mini-caption">Items</div>
+            <div>
+              <div class="wrapper-item"><select id="item-1"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-2"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-3"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-4"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-5"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-6"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-7"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-8"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-9"></select></div>
+            </div>
+            <div>
+              <div class="wrapper-item"><select id="item-10"></select></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <div class="mini-caption">Description</div>
+            <output id="build-description"></output>
+          </div>
+          <div class="controls">
+            <div><button id="button-optimal-class">Optimal class</button></div>
+            <div></div>
+          </div>
+          <div class="wrapper-adsense">
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins
+              class="adsbygoogle adsense-responsive bottom"
+              style="display: block"
+              data-ad-client="ca-pub-6014318266956417"
+              data-ad-slot="3568547255"
+            ></ins>
+            <script>
+              ;(adsbygoogle = window.adsbygoogle || []).push({})
+            </script>
+          </div>
+          <div class="links"></div>
+          <div class="planner-tips">
+            <header>Tips<i class="material-icons">expand_less</i></header>
+            <ul>
+              <li>Weapon effects are applied only in active slots: lh-1 and rh-1.</li>
+              <li>
+                In the attribute input field press up or down keys on keyboard to increase or
+                decrease the attribute value.
+              </li>
+              <li>To save build, please <a href="/signin">sign in</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="optimal-class-dialog" class="form-controls">
+      <h2>Find optimal class</h2>
+      <div id="optimal-class-dialog__attributes">
+        <div>
+          <label id="optimal-class-dialog__label-vigor" for="optimal-class-dialog__vigor"
+            >Vigor</label
+          ><input id="optimal-class-dialog__vigor" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-endurance" for="optimal-class-dialog__endurance"
+            >Endurance</label
+          ><input id="optimal-class-dialog__endurance" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-vitality" for="optimal-class-dialog__vitality"
+            >Vitality</label
+          ><input id="optimal-class-dialog__vitality" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-attunement" for="optimal-class-dialog__attunement"
+            >Attunement</label
+          ><input id="optimal-class-dialog__attunement" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-strength" for="optimal-class-dialog__strength"
+            >Strength</label
+          ><input id="optimal-class-dialog__strength" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-dexterity" for="optimal-class-dialog__dexterity"
+            >Dexterity</label
+          ><input id="optimal-class-dialog__dexterity" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label
+            id="optimal-class-dialog__label-adaptability"
+            for="optimal-class-dialog__adaptability"
+            >Adaptability</label
+          ><input id="optimal-class-dialog__adaptability" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label
+            id="optimal-class-dialog__label-intelligence"
+            for="optimal-class-dialog__intelligence"
+            >Intelligence</label
+          ><input id="optimal-class-dialog__intelligence" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-faith" for="optimal-class-dialog__faith"
+            >Faith</label
+          ><input id="optimal-class-dialog__faith" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+      </div>
+      <div id="optimal-class-dialog__soul-memory-optimal-class-list">
+        <table>
+          <caption>
+            SM optimal class:<output
+              id="optimal-class-dialog__soul-memory-optimal-class-name"
+            ></output>
+          </caption>
+          <thead>
+            <tr>
+              <td>Class</td>
+              <td>Soul memory</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="optimal-class-dialog__level-optimal-class-list">
+        <table>
+          <caption>
+            LVL optimal class:<output id="optimal-class-dialog__level-optimal-class-name"></output>
+          </caption>
+          <thead>
+            <tr>
+              <td>Class</td>
+              <td>Level</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <footer>
+        <button id="optimal-class-dialog__button-apply-soul-memory" class="default">Apply SM</button
+        ><button class="default" id="optimal-class-dialog__button-apply-level">Apply LVL</button
+        ><button id="optimal-class-dialog__button-close">Close</button>
+      </footer>
+    </div>
+  </body>
+</html>

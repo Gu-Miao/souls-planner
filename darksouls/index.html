@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Dark Souls Character Planner</title>
+    <meta
+      name="description"
+      content="Dark Souls Character Planner includes stats, weapons attack with buffs calculator, spells and items attack calculators, all equipment effects, search optimal class and optimal armor."
+    />
+    <meta name="keywords" content="Dark Souls Character Planner" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link href="/public/fonts/Aclonica.css" rel="stylesheet" />
+    <link href="/public/fonts/Material.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/public/vendors/vendors.min.css" />
+    <script src="/public/vendors/vendors.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/head.min.css" />
+    <script src="/public/scripts/release/head.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/release/DarkSouls/planner.min.css" />
+    <script src="/public/scripts/release/DarkSouls/planner.min.js"></script>
+  </head>
+  <body>
+    <script>
+      var plannerId = 'darksouls'
+    </script>
+    <div class="modal-overlay">
+      <div id="main-menu">
+        <ul class="mm__horizontal">
+          <li>
+            <a href="/"><i class="material-icons">home</i></a>
+          </li>
+          <li><a href="/darksouls">DS</a></li>
+          <li><a href="/darksouls2">DS 2</a></li>
+          <li><a href="/darksouls3">DS 3</a></li>
+        </ul>
+      </div>
+      <div class="planner dark">
+        <h2 class="page-caption">DARK SOULS Character Planner</h2>
+        <div class="col n1">
+          <div class="character-class">
+            <label for="class">Class</label>
+            <div class="wrapper-class"><select id="class"></select></div>
+            <div class="options">
+              <button id="button-new" class="material-icons" title="New build">add</button
+              ><button id="button-reset" class="material-icons" title="Reset">refresh</button>
+            </div>
+          </div>
+          <div class="gender">
+            <label for="gender">Gender</label>
+            <div><select id="gender"></select></div>
+          </div>
+          <div class="level">
+            <label for="level">Level</label><input id="level" type="text" readonly tabindex="-1" />
+          </div>
+          <div class="attributes">
+            <div class="mini-caption">
+              <label id="label-attribute"></label><span class="initial">Init</span
+              ><span class="current">Current</span>
+            </div>
+            <div>
+              <label id="label-vitality" for="vitality"></label
+              ><output id="vitality-initial" class="initial"></output
+              ><input id="vitality" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-attunement" for="attunement"></label
+              ><output id="attunement-initial" class="initial"></output
+              ><input id="attunement" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-endurance" for="endurance"></label
+              ><output id="endurance-initial" class="initial"></output
+              ><input id="endurance" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-strength" for="strength"></label
+              ><output id="strength-initial" class="initial"></output
+              ><input id="strength" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-dexterity" for="dexterity"></label
+              ><output id="dexterity-initial" class="initial"></output
+              ><input id="dexterity" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-resistance" for="resistance"></label
+              ><output id="resistance-initial" class="initial"></output
+              ><input id="resistance" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-intelligence" for="intelligence"></label
+              ><output id="intelligence-initial" class="initial"></output
+              ><input id="intelligence" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div>
+              <label id="label-faith" for="faith"></label
+              ><output id="faith-initial" class="initial"></output
+              ><input id="faith" type="number" /><button class="material-icons down" tabindex="-1">
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+            <div id="wrapper-humanity">
+              <label id="label-humanity" for="humanity"></label
+              ><output id="humanity-initial" class="initial"></output
+              ><input id="humanity" type="number" /><button
+                class="material-icons down"
+                tabindex="-1"
+              >
+                keyboard_arrow_down</button
+              ><button class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+            </div>
+          </div>
+          <div class="cost">
+            <div>
+              <div class="mini-caption">Souls to next level</div>
+              <input id="souls-to-next-level" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <div class="mini-caption">Min souls spent</div>
+              <input id="min-souls-spent" type="text" readonly tabindex="-1" />
+            </div>
+          </div>
+          <div class="covenant">
+            <label for="covenant">Covenant</label>
+            <div id="wrapper-covenant"><select id="covenant"></select></div>
+            <div id="wrapper-covenant-level"><select id="covenant-level"></select></div>
+          </div>
+          <div class="spells">
+            <div class="mini-caption">
+              <span>Spells</span><span>Uses</span><span>Length</span><span>Buff</span>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-1-require-strength"></output
+                ><output id="spell-1-require-dexterity"></output
+                ><output id="spell-1-require-intelligence"></output
+                ><output id="spell-1-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-1-physical-atk"></output><output id="spell-1-magic-atk"></output
+                ><output id="spell-1-fire-atk"></output><output id="spell-1-lightning-atk"></output
+                ><output id="spell-1-bleed-aux"></output><output id="spell-1-poison-aux"></output
+                ><output id="spell-1-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-1"></select></div>
+                <input id="spell-1-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-1-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-1-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-1-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-2-require-strength"></output
+                ><output id="spell-2-require-dexterity"></output
+                ><output id="spell-2-require-intelligence"></output
+                ><output id="spell-2-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-2-physical-atk"></output><output id="spell-2-magic-atk"></output
+                ><output id="spell-2-fire-atk"></output><output id="spell-2-lightning-atk"></output
+                ><output id="spell-2-bleed-aux"></output><output id="spell-2-poison-aux"></output
+                ><output id="spell-2-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-2"></select></div>
+                <input id="spell-2-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-2-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-2-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-2-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-3-require-strength"></output
+                ><output id="spell-3-require-dexterity"></output
+                ><output id="spell-3-require-intelligence"></output
+                ><output id="spell-3-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-3-physical-atk"></output><output id="spell-3-magic-atk"></output
+                ><output id="spell-3-fire-atk"></output><output id="spell-3-lightning-atk"></output
+                ><output id="spell-3-bleed-aux"></output><output id="spell-3-poison-aux"></output
+                ><output id="spell-3-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-3"></select></div>
+                <input id="spell-3-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-3-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-3-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-3-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-4-require-strength"></output
+                ><output id="spell-4-require-dexterity"></output
+                ><output id="spell-4-require-intelligence"></output
+                ><output id="spell-4-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-4-physical-atk"></output><output id="spell-4-magic-atk"></output
+                ><output id="spell-4-fire-atk"></output><output id="spell-4-lightning-atk"></output
+                ><output id="spell-4-bleed-aux"></output><output id="spell-4-poison-aux"></output
+                ><output id="spell-4-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-4"></select></div>
+                <input id="spell-4-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-4-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-4-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-4-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-5-require-strength"></output
+                ><output id="spell-5-require-dexterity"></output
+                ><output id="spell-5-require-intelligence"></output
+                ><output id="spell-5-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-5-physical-atk"></output><output id="spell-5-magic-atk"></output
+                ><output id="spell-5-fire-atk"></output><output id="spell-5-lightning-atk"></output
+                ><output id="spell-5-bleed-aux"></output><output id="spell-5-poison-aux"></output
+                ><output id="spell-5-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-5"></select></div>
+                <input id="spell-5-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-5-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-5-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-5-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-6-require-strength"></output
+                ><output id="spell-6-require-dexterity"></output
+                ><output id="spell-6-require-intelligence"></output
+                ><output id="spell-6-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-6-physical-atk"></output><output id="spell-6-magic-atk"></output
+                ><output id="spell-6-fire-atk"></output><output id="spell-6-lightning-atk"></output
+                ><output id="spell-6-bleed-aux"></output><output id="spell-6-poison-aux"></output
+                ><output id="spell-6-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-6"></select></div>
+                <input id="spell-6-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-6-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-6-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-6-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-7-require-strength"></output
+                ><output id="spell-7-require-dexterity"></output
+                ><output id="spell-7-require-intelligence"></output
+                ><output id="spell-7-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-7-physical-atk"></output><output id="spell-7-magic-atk"></output
+                ><output id="spell-7-fire-atk"></output><output id="spell-7-lightning-atk"></output
+                ><output id="spell-7-bleed-aux"></output><output id="spell-7-poison-aux"></output
+                ><output id="spell-7-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-7"></select></div>
+                <input id="spell-7-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-7-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-7-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-7-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-8-require-strength"></output
+                ><output id="spell-8-require-dexterity"></output
+                ><output id="spell-8-require-intelligence"></output
+                ><output id="spell-8-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-8-physical-atk"></output><output id="spell-8-magic-atk"></output
+                ><output id="spell-8-fire-atk"></output><output id="spell-8-lightning-atk"></output
+                ><output id="spell-8-bleed-aux"></output><output id="spell-8-poison-aux"></output
+                ><output id="spell-8-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-8"></select></div>
+                <input id="spell-8-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-8-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-8-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-8-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-9-require-strength"></output
+                ><output id="spell-9-require-dexterity"></output
+                ><output id="spell-9-require-intelligence"></output
+                ><output id="spell-9-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-9-physical-atk"></output><output id="spell-9-magic-atk"></output
+                ><output id="spell-9-fire-atk"></output><output id="spell-9-lightning-atk"></output
+                ><output id="spell-9-bleed-aux"></output><output id="spell-9-poison-aux"></output
+                ><output id="spell-9-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-9"></select></div>
+                <input id="spell-9-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-9-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-9-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-9-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-10-require-strength"></output
+                ><output id="spell-10-require-dexterity"></output
+                ><output id="spell-10-require-intelligence"></output
+                ><output id="spell-10-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-10-physical-atk"></output><output id="spell-10-magic-atk"></output
+                ><output id="spell-10-fire-atk"></output
+                ><output id="spell-10-lightning-atk"></output
+                ><output id="spell-10-bleed-aux"></output><output id="spell-10-poison-aux"></output
+                ><output id="spell-10-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-10"></select></div>
+                <input id="spell-10-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-10-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-10-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-10-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-11-require-strength"></output
+                ><output id="spell-11-require-dexterity"></output
+                ><output id="spell-11-require-intelligence"></output
+                ><output id="spell-11-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-11-physical-atk"></output><output id="spell-11-magic-atk"></output
+                ><output id="spell-11-fire-atk"></output
+                ><output id="spell-11-lightning-atk"></output
+                ><output id="spell-11-bleed-aux"></output><output id="spell-11-poison-aux"></output
+                ><output id="spell-11-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-11"></select></div>
+                <input id="spell-11-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-11-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-11-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-11-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-12-require-strength"></output
+                ><output id="spell-12-require-dexterity"></output
+                ><output id="spell-12-require-intelligence"></output
+                ><output id="spell-12-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-12-physical-atk"></output><output id="spell-12-magic-atk"></output
+                ><output id="spell-12-fire-atk"></output
+                ><output id="spell-12-lightning-atk"></output
+                ><output id="spell-12-bleed-aux"></output><output id="spell-12-poison-aux"></output
+                ><output id="spell-12-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-12"></select></div>
+                <input id="spell-12-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-12-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-12-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-12-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-13-require-strength"></output
+                ><output id="spell-13-require-dexterity"></output
+                ><output id="spell-13-require-intelligence"></output
+                ><output id="spell-13-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-13-physical-atk"></output><output id="spell-13-magic-atk"></output
+                ><output id="spell-13-fire-atk"></output
+                ><output id="spell-13-lightning-atk"></output
+                ><output id="spell-13-bleed-aux"></output><output id="spell-13-poison-aux"></output
+                ><output id="spell-13-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-13"></select></div>
+                <input id="spell-13-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-13-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-13-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-13-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params requirements">
+                Require <output id="spell-14-require-strength"></output
+                ><output id="spell-14-require-dexterity"></output
+                ><output id="spell-14-require-intelligence"></output
+                ><output id="spell-14-require-faith"></output>
+              </div>
+              <div class="equipment-params attack">
+                <output id="spell-14-physical-atk"></output><output id="spell-14-magic-atk"></output
+                ><output id="spell-14-fire-atk"></output
+                ><output id="spell-14-lightning-atk"></output
+                ><output id="spell-14-bleed-aux"></output><output id="spell-14-poison-aux"></output
+                ><output id="spell-14-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-spell"><select id="spell-14"></select></div>
+                <input id="spell-14-uses" type="text" class="uses" readonly tabindex="-1" /><input
+                  id="spell-14-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="spell-14-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="spell-14-buff"
+                ></label>
+              </div>
+            </div>
+          </div>
+          <div class="arrows">
+            <div class="mini-caption"><span>Arrows</span><span>Range</span></div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="arrow-1-physical-atk"></output><output id="arrow-1-magic-atk"></output
+                ><output id="arrow-1-fire-atk"></output><output id="arrow-1-lightning-atk"></output
+                ><output id="arrow-1-bleed-aux"></output><output id="arrow-1-poison-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-arrow"><select id="arrow-1"></select></div>
+                <input id="arrow-1-range" type="text" class="range" readonly tabindex="-1" />
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="arrow-2-physical-atk"></output><output id="arrow-2-magic-atk"></output
+                ><output id="arrow-2-fire-atk"></output><output id="arrow-2-lightning-atk"></output
+                ><output id="arrow-2-bleed-aux"></output><output id="arrow-2-poison-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-arrow"><select id="arrow-2"></select></div>
+                <input id="arrow-2-range" type="text" class="range" readonly tabindex="-1" />
+              </div>
+            </div>
+          </div>
+          <div class="bolts">
+            <div class="mini-caption"><span>Bolts</span><span>Range</span></div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="bolt-1-physical-atk"></output><output id="bolt-1-magic-atk"></output
+                ><output id="bolt-1-fire-atk"></output><output id="bolt-1-lightning-atk"></output
+                ><output id="bolt-1-bleed-aux"></output><output id="bolt-1-poison-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-bolt"><select id="bolt-1"></select></div>
+                <input id="bolt-1-range" type="text" class="range" readonly tabindex="-1" />
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="bolt-2-physical-atk"></output><output id="bolt-2-magic-atk"></output
+                ><output id="bolt-2-fire-atk"></output><output id="bolt-2-lightning-atk"></output
+                ><output id="bolt-2-bleed-aux"></output><output id="bolt-2-poison-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-bolt"><select id="bolt-2"></select></div>
+                <input id="bolt-2-range" type="text" class="range" readonly tabindex="-1" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col n2">
+          <div class="armor">
+            <div class="mini-caption">Armor</div>
+            <div>
+              <label for="head">Head</label>
+              <div class="wrapper-protector"><select id="head"></select></div>
+              <div class="wrapper-reinforce"><select id="head-reinforce"></select></div>
+            </div>
+            <div>
+              <label for="chest">Chest</label>
+              <div class="wrapper-protector"><select id="chest"></select></div>
+              <div class="wrapper-reinforce"><select id="chest-reinforce"></select></div>
+            </div>
+            <div>
+              <label for="hands">Hands</label>
+              <div class="wrapper-protector"><select id="hands"></select></div>
+              <div class="wrapper-reinforce"><select id="hands-reinforce"></select></div>
+            </div>
+            <div>
+              <label for="legs">Legs</label>
+              <div class="wrapper-protector"><select id="legs"></select></div>
+              <div class="wrapper-reinforce"><select id="legs-reinforce"></select></div>
+            </div>
+          </div>
+          <div class="weapons">
+            <div class="mini-caption">
+              <span class="lh">Left hand</span><span class="rh">Right hand</span>
+            </div>
+            <div class="active-weapons">
+              <div class="lh">
+                <div class="equipment-params attack">
+                  ATK <output id="lh1-physical-atk"></output><output id="lh1-magic-atk"></output
+                  ><output id="lh1-fire-atk"></output><output id="lh1-lightning-atk"></output
+                  ><output id="lh1-bleed-aux"></output><output id="lh1-poison-aux"></output>
+                </div>
+                <div class="equipment-params mag-adjust">
+                  MagAdjust <output id="lh1-mag-adjust"></output>
+                </div>
+                <div class="equipment-params defence">
+                  DEF <output id="lh1-physical-def"></output><output id="lh1-magic-def"></output
+                  ><output id="lh1-fire-def"></output><output id="lh1-lightning-def"></output
+                  ><output id="lh1-stability"></output>
+                </div>
+                <div class="equipment-params resistance">
+                  RES <output id="lh1-poison-res"></output><output id="lh1-bleed-res"></output
+                  ><output id="lh1-curse-res"></output>
+                </div>
+                <div class="equipment-params requirements">
+                  Require <output id="lh1-require-strength"></output
+                  ><output id="lh1-require-dexterity"></output
+                  ><output id="lh1-require-intelligence"></output
+                  ><output id="lh1-require-faith"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="lh1"></select></div>
+                <div class="wrapper-reinforce"><select id="lh1-reinforce"></select></div>
+                <div class="wrapper-upgrade"><select id="lh1-upgrade"></select></div>
+              </div>
+              <div class="rh">
+                <div class="equipment-params attack">
+                  ATK <output id="rh1-physical-atk"></output><output id="rh1-magic-atk"></output
+                  ><output id="rh1-fire-atk"></output><output id="rh1-lightning-atk"></output
+                  ><output id="rh1-bleed-aux"></output><output id="rh1-poison-aux"></output>
+                </div>
+                <div class="equipment-params mag-adjust">
+                  MagAdjust <output id="rh1-mag-adjust"></output>
+                </div>
+                <div class="equipment-params defence">
+                  DEF <output id="rh1-physical-def"></output><output id="rh1-magic-def"></output
+                  ><output id="rh1-fire-def"></output><output id="rh1-lightning-def"></output
+                  ><output id="rh1-stability"></output>
+                </div>
+                <div class="equipment-params resistance">
+                  RES <output id="rh1-poison-res"></output><output id="rh1-bleed-res"></output
+                  ><output id="rh1-curse-res"></output>
+                </div>
+                <div class="equipment-params requirements">
+                  Require <output id="rh1-require-strength"></output
+                  ><output id="rh1-require-dexterity"></output
+                  ><output id="rh1-require-intelligence"></output
+                  ><output id="rh1-require-faith"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="rh1"></select></div>
+                <div class="wrapper-reinforce"><select id="rh1-reinforce"></select></div>
+                <div class="wrapper-upgrade"><select id="rh1-upgrade"></select></div>
+              </div>
+            </div>
+            <div>
+              <div class="lh">
+                <div class="equipment-params attack">
+                  ATK <output id="lh2-physical-atk"></output><output id="lh2-magic-atk"></output
+                  ><output id="lh2-fire-atk"></output><output id="lh2-lightning-atk"></output
+                  ><output id="lh2-bleed-aux"></output><output id="lh2-poison-aux"></output>
+                </div>
+                <div class="equipment-params mag-adjust">
+                  MagAdjust <output id="lh2-mag-adjust"></output>
+                </div>
+                <div class="equipment-params defence">
+                  DEF <output id="lh2-physical-def"></output><output id="lh2-magic-def"></output
+                  ><output id="lh2-fire-def"></output><output id="lh2-lightning-def"></output
+                  ><output id="lh2-stability"></output>
+                </div>
+                <div class="equipment-params resistance">
+                  RES <output id="lh2-poison-res"></output><output id="lh2-bleed-res"></output
+                  ><output id="lh2-curse-res"></output>
+                </div>
+                <div class="equipment-params requirements">
+                  Require <output id="lh2-require-strength"></output
+                  ><output id="lh2-require-dexterity"></output
+                  ><output id="lh2-require-intelligence"></output
+                  ><output id="lh2-require-faith"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="lh2"></select></div>
+                <div class="wrapper-reinforce"><select id="lh2-reinforce"></select></div>
+                <div class="wrapper-upgrade"><select id="lh2-upgrade"></select></div>
+              </div>
+              <div class="rh">
+                <div class="equipment-params attack">
+                  ATK <output id="rh2-physical-atk"></output><output id="rh2-magic-atk"></output
+                  ><output id="rh2-fire-atk"></output><output id="rh2-lightning-atk"></output
+                  ><output id="rh2-bleed-aux"></output><output id="rh2-poison-aux"></output>
+                </div>
+                <div class="equipment-params mag-adjust">
+                  MagAdjust <output id="rh2-mag-adjust"></output>
+                </div>
+                <div class="equipment-params defence">
+                  DEF <output id="rh2-physical-def"></output><output id="rh2-magic-def"></output
+                  ><output id="rh2-fire-def"></output><output id="rh2-lightning-def"></output
+                  ><output id="rh2-stability"></output>
+                </div>
+                <div class="equipment-params resistance">
+                  RES <output id="rh2-poison-res"></output><output id="rh2-bleed-res"></output
+                  ><output id="rh2-curse-res"></output>
+                </div>
+                <div class="equipment-params requirements">
+                  Require <output id="rh2-require-strength"></output
+                  ><output id="rh2-require-dexterity"></output
+                  ><output id="rh2-require-intelligence"></output
+                  ><output id="rh2-require-faith"></output>
+                </div>
+                <div class="wrapper-weapon"><select id="rh2"></select></div>
+                <div class="wrapper-reinforce"><select id="rh2-reinforce"></select></div>
+                <div class="wrapper-upgrade"><select id="rh2-upgrade"></select></div>
+              </div>
+            </div>
+          </div>
+          <div class="grip">
+            <input id="grip" type="checkbox" /><label for="grip">Two-handed</label>
+          </div>
+          <div class="rings">
+            <div class="mini-caption">Rings</div>
+            <div><select id="ring-1"></select></div>
+            <div><select id="ring-2"></select></div>
+          </div>
+          <div class="effects">
+            <div class="mini-caption">Effects</div>
+            <ul id="effects"></ul>
+          </div>
+        </div>
+        <div class="col n3">
+          <div class="perfomance-1">
+            <div><label>HP</label><input id="hp" type="text" readonly tabindex="-1" /></div>
+            <div>
+              <label>Stamina</label><input id="stamina" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Equip load</label
+              ><input id="equipment-load" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Weight left / Roll</label
+              ><input id="weight-left" type="text" readonly tabindex="-1" />
+            </div>
+            <div><label>Poise</label><input id="poise" type="text" readonly tabindex="-1" /></div>
+            <div>
+              <label>Item Discovery</label
+              ><input id="item-discovery" type="text" readonly tabindex="-1" />
+            </div>
+            <div>
+              <label>Attunement Slots</label
+              ><input id="attunement-slots" type="text" readonly tabindex="-1" />
+            </div>
+          </div>
+          <div class="stamina-regeneration">
+            <div class="mini-caption"><output id="stamina-regeneration-speed"></output></div>
+          </div>
+          <div class="character-options">
+            <div><input id="low-hp" type="checkbox" /><label for="low-hp">Low HP</label></div>
+            <div>
+              <input id="dragon-head" type="checkbox" /><label for="dragon-head">Dragon Head</label>
+            </div>
+            <div>
+              <input id="dragon-torso" type="checkbox" /><label for="dragon-torso"
+                >Dragon Torso</label
+              >
+            </div>
+          </div>
+          <div class="perfomance-2">
+            <div class="defence">
+              <div class="mini-caption">Defence</div>
+              <div>
+                <label>Physical</label
+                ><input id="physical-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label class="vs">VS Strike</label
+                ><input id="strike-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label class="vs">VS Slash</label
+                ><input id="slash-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label class="vs">VS Thrust</label
+                ><input id="thrust-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Magic</label><input id="magic-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Flame</label><input id="fire-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Lightning</label
+                ><input id="lightning-def" type="text" readonly tabindex="-1" />
+              </div>
+              <div class="mini-caption">Resistance</div>
+              <div>
+                <label>Bleed</label><input id="bleed-res" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Poison</label><input id="poison-res" type="text" readonly tabindex="-1" />
+              </div>
+              <div>
+                <label>Curse</label><input id="curse-res" type="text" readonly tabindex="-1" />
+              </div>
+            </div>
+          </div>
+          <div class="items">
+            <div class="mini-caption"><span>Items</span><span>Length</span><span>Buff</span></div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="item-1-physical-atk"></output><output id="item-1-magic-atk"></output
+                ><output id="item-1-fire-atk"></output><output id="item-1-lightning-atk"></output
+                ><output id="item-1-bleed-aux"></output><output id="item-1-poison-aux"></output
+                ><output id="item-1-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-item"><select id="item-1"></select></div>
+                <input
+                  id="item-1-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="item-1-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="item-1-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="item-2-physical-atk"></output><output id="item-2-magic-atk"></output
+                ><output id="item-2-fire-atk"></output><output id="item-2-lightning-atk"></output
+                ><output id="item-2-bleed-aux"></output><output id="item-2-poison-aux"></output
+                ><output id="item-2-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-item"><select id="item-2"></select></div>
+                <input
+                  id="item-2-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="item-2-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="item-2-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="item-3-physical-atk"></output><output id="item-3-magic-atk"></output
+                ><output id="item-3-fire-atk"></output><output id="item-3-lightning-atk"></output
+                ><output id="item-3-bleed-aux"></output><output id="item-3-poison-aux"></output
+                ><output id="item-3-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-item"><select id="item-3"></select></div>
+                <input
+                  id="item-3-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="item-3-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="item-3-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="item-4-physical-atk"></output><output id="item-4-magic-atk"></output
+                ><output id="item-4-fire-atk"></output><output id="item-4-lightning-atk"></output
+                ><output id="item-4-bleed-aux"></output><output id="item-4-poison-aux"></output
+                ><output id="item-4-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-item"><select id="item-4"></select></div>
+                <input
+                  id="item-4-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="item-4-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="item-4-buff"
+                ></label>
+              </div>
+            </div>
+            <div>
+              <div class="equipment-params attack">
+                <output id="item-5-physical-atk"></output><output id="item-5-magic-atk"></output
+                ><output id="item-5-fire-atk"></output><output id="item-5-lightning-atk"></output
+                ><output id="item-5-bleed-aux"></output><output id="item-5-poison-aux"></output
+                ><output id="item-5-toxic-aux"></output>
+              </div>
+              <div>
+                <div class="wrapper-item"><select id="item-5"></select></div>
+                <input
+                  id="item-5-duration"
+                  type="text"
+                  class="duration"
+                  readonly
+                  tabindex="-1"
+                /><input id="item-5-buff" class="buff" type="checkbox" tabindex="-1" /><label
+                  for="item-5-buff"
+                ></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="description">
+            <div class="mini-caption">Description</div>
+            <output id="build-description"></output>
+          </div>
+          <div class="controls">
+            <div>
+              <button id="button-optimal-armor">Optimal armor</button
+              ><button id="button-optimal-class">Optimal class</button>
+            </div>
+            <div></div>
+          </div>
+          <div class="links">
+            <div><a href="/darksouls/weaponatk">Weapons attack calculator</a></div>
+            <div><a href="/darksouls/weapondef">Weapons defence calculator</a></div>
+            <div><a href="/darksouls/rangedweaponatk">Ranged weapons attack calculator</a></div>
+            <div><a href="/darksouls/weaponstm">Weapons stamina usage</a></div>
+            <div><a href="/darksouls/armor">Armor</a></div>
+            <div><a href="/darksouls/spellatk">Spells attack calculator</a></div>
+            <div><a href="/darksouls/itematk">Items attack calculator</a></div>
+          </div>
+          <div class="planner-tips">
+            <header>Tips<i class="material-icons">expand_less</i></header>
+            <ul>
+              <li>
+                Click on the weapon parameters to view attack power, magic adjustment, defence,
+                resistance and requirements.
+              </li>
+              <li>Tooltips show more accurate values of defence.</li>
+              <li>Select spell tool to use self buff, weapon buff and view spell attack.</li>
+              <li>Buffed weapon must be selected in active slot.</li>
+              <li>
+                Spell tool must be selected in left (for magic weapon) or right (for magic shield)
+                hand.
+              </li>
+              <li>Select bow and crossbow to view arrow attack and bolt attack.</li>
+              <li>
+                In the attribute input field press up or down keys on keyboard to increase or
+                decrease the attribute value.
+              </li>
+              <li>To save build, please <a href="/signin">sign in</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="optimal-class-dialog" class="form-controls">
+      <h2>Find optimal class</h2>
+      <div id="optimal-class-dialog__attributes">
+        <div>
+          <label id="optimal-class-dialog__label-vitality" for="optimal-class-dialog__vitality"
+            >Vitality</label
+          ><input id="optimal-class-dialog__vitality" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-attunement" for="optimal-class-dialog__attunement"
+            >Attunement</label
+          ><input id="optimal-class-dialog__attunement" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-endurance" for="optimal-class-dialog__endurance"
+            >Endurance</label
+          ><input id="optimal-class-dialog__endurance" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-strength" for="optimal-class-dialog__strength"
+            >Strength</label
+          ><input id="optimal-class-dialog__strength" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-dexterity" for="optimal-class-dialog__dexterity"
+            >Dexterity</label
+          ><input id="optimal-class-dialog__dexterity" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-resistance" for="optimal-class-dialog__resistance"
+            >Resistance</label
+          ><input id="optimal-class-dialog__resistance" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label
+            id="optimal-class-dialog__label-intelligence"
+            for="optimal-class-dialog__intelligence"
+            >Intelligence</label
+          ><input id="optimal-class-dialog__intelligence" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+        <div>
+          <label id="optimal-class-dialog__label-faith" for="optimal-class-dialog__faith"
+            >Faith</label
+          ><input id="optimal-class-dialog__faith" type="number" /><button
+            type="button"
+            class="material-icons down"
+            tabindex="-1"
+          >
+            keyboard_arrow_down</button
+          ><button type="button" class="material-icons up" tabindex="-1">keyboard_arrow_up</button>
+        </div>
+      </div>
+      <div id="optimal-class-dialog__results">
+        <table>
+          <caption>
+            Optimal class:<output id="optimal-class-dialog__optimal-class-name"></output>
+          </caption>
+          <thead>
+            <tr>
+              <td>Class</td>
+              <td>Level</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <footer>
+        <button class="default" id="optimal-class-dialog__button-apply">Apply</button
+        ><button id="optimal-class-dialog__button-close">Close</button>
+      </footer>
+    </div>
+    <div id="optimal-armor-dialog" class="form-controls">
+      <h2>Find optimal armor</h2>
+      <div>
+        <div id="optimal-armor-dialog__breakpoints">
+          <div class="mini-caption">Weight / Max. load ratio</div>
+          <div>
+            <input
+              id="optimal-armor-dialog__breakpoint-25"
+              type="radio"
+              name="optimal-armor-dialog__weight-ratio"
+              value="25"
+              checked
+            /><label for="optimal-armor-dialog__breakpoint-25">Up to 25% load</label>
+          </div>
+          <div>
+            <input
+              id="optimal-armor-dialog__breakpoint-50"
+              type="radio"
+              name="optimal-armor-dialog__weight-ratio"
+              value="50"
+            /><label for="optimal-armor-dialog__breakpoint-50">Up to 50% load</label>
+          </div>
+          <div>
+            <input
+              id="optimal-armor-dialog__breakpoint-100"
+              type="radio"
+              name="optimal-armor-dialog__weight-ratio"
+              value="100"
+            /><label for="optimal-armor-dialog__breakpoint-100">Up to 100% load</label>
+          </div>
+          <div>
+            <input
+              id="optimal-armor-dialog__breakpoint-custom"
+              type="radio"
+              name="optimal-armor-dialog__weight-ratio"
+              value="-1"
+            /><label for="optimal-armor-dialog__custom-load-ratio"
+              >Up to <input id="optimal-armor-dialog__custom-load-ratio" type="number" /> %
+              load</label
+            >
+          </div>
+        </div>
+        <div id="optimal-armor-dialog__fixed-armor">
+          <div class="mini-caption">Fixed armor</div>
+          <div>
+            <label for="optimal-armor-dialog__head">Head</label>
+            <div class="wrapper-select"><select id="optimal-armor-dialog__head"></select></div>
+          </div>
+          <div>
+            <label for="optimal-armor-dialog__chest">Chest</label>
+            <div class="wrapper-select"><select id="optimal-armor-dialog__chest"></select></div>
+          </div>
+          <div>
+            <label for="optimal-armor-dialog__hands">Hands</label>
+            <div class="wrapper-select"><select id="optimal-armor-dialog__hands"></select></div>
+          </div>
+          <div>
+            <label for="optimal-armor-dialog__legs">Legs</label>
+            <div class="wrapper-select"><select id="optimal-armor-dialog__legs"></select></div>
+          </div>
+        </div>
+        <div id="optimal-armor-dialog__allows">
+          <div class="mini-caption">Allow</div>
+          <div>
+            <input id="optimal-armor-dialog__allow_naked" type="checkbox" checked /><label
+              for="optimal-armor-dialog__allow_naked"
+              >Naked</label
+            >
+          </div>
+        </div>
+        <div id="optimal-armor-dialog__maximize">
+          <div class="mini-caption">Maximized parameter, min. values</div>
+          <div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-physical-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="PHYSICAL_DEF"
+                checked
+              /><label for="optimal-armor-dialog__maximize-physical-def">Physical</label
+              ><input
+                id="optimal-armor-dialog__min-physical-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-strike-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="STRIKE_DEF_RATE"
+              /><label for="optimal-armor-dialog__maximize-strike-def">Strike</label
+              ><input
+                id="optimal-armor-dialog__min-strike-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-slash-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="SLASH_DEF_RATE"
+              /><label for="optimal-armor-dialog__maximize-slash-def">Slash</label
+              ><input
+                id="optimal-armor-dialog__min-slash-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-thrust-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="THRUST_DEF_RATE"
+              /><label for="optimal-armor-dialog__maximize-thrust-def">Thrust</label
+              ><input
+                id="optimal-armor-dialog__min-thrust-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-magic-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="MAGIC_DEF"
+              /><label for="optimal-armor-dialog__maximize-magic-def">Magic</label
+              ><input
+                id="optimal-armor-dialog__min-magic-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-fire-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="FIRE_DEF"
+              /><label for="optimal-armor-dialog__maximize-fire-def">Fire</label
+              ><input
+                id="optimal-armor-dialog__min-fire-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-lightning-def"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="LIGHTNING_DEF"
+              /><label for="optimal-armor-dialog__maximize-lightning-def">Lightning</label
+              ><input
+                id="optimal-armor-dialog__min-lightning-def"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-bleed-res"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="BLEED_RES"
+              /><label for="optimal-armor-dialog__maximize-bleed-res">Bleed</label
+              ><input id="optimal-armor-dialog__min-bleed-res" type="number" class="min-value" />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-poison-res"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="POISON_RES"
+              /><label for="optimal-armor-dialog__maximize-poison-res">Poison</label
+              ><input id="optimal-armor-dialog__min-poison-res" type="number" class="min-value" />
+            </div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-curse-res"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="CURSE_RES"
+              /><label for="optimal-armor-dialog__maximize-curse-res">Curse</label
+              ><input id="optimal-armor-dialog__min-curse-res" type="number" class="min-value" />
+            </div>
+          </div>
+          <div>
+            <div>
+              <input
+                id="optimal-armor-dialog__maximize-poise"
+                type="radio"
+                name="optimal-armor-dialog__maximize"
+                value="POISE"
+              /><label for="optimal-armor-dialog__maximize-poise">Poise</label
+              ><input
+                id="optimal-armor-dialog__min-poise"
+                type="number"
+                step="any"
+                class="min-value"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="optimal-armor-dialog__actions">
+        <button id="optimal-armor-dialog__button-find" class="default">Find</button
+        ><button type="button" id="optimal-armor-dialog__button-reset">Reset</button
+        ><button type="button" id="optimal-armor-dialog__button-close">Close</button>
+      </div>
+      <div id="optimal-armor-dialog__results">
+        <div id="optimal-armor-dialog__combination-count"></div>
+        <table>
+          <thead>
+            <tr>
+              <td class="index">#</td>
+              <td class="combination">Combination</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
