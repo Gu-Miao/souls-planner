@@ -12,6 +12,7 @@ two way to use:
 
 ## Differences
 
+* Remove sign in, sign up, settings, builds, top16.
 * Remove google analyze, google AD, cookies
-* Change some style issue
+* Fix some style issue
 * Change all paths to relative paths for local use
